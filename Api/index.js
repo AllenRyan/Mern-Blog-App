@@ -1,6 +1,6 @@
-import e from "express";
+import express from "express";
 
-const app = e();
+const app = express();
 const port = 3000
 
 app.listen(port, (req, res) => {
