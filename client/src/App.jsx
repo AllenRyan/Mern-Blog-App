@@ -1,3 +1,4 @@
+import { Flowbite } from "flowbite-react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import About from "./pages/About.jsx";
