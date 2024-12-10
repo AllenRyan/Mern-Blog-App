@@ -24,11 +24,12 @@ function Signup() {
         body: JSON.stringify(formData)
       });
       const data = await res.json();
+      setLoading(false)
       if (data.success === false) {
         return setErrorMessage(data.message)
       }
       // console.log(data)
-      setLoading(false)
+     
       if (res.ok) {
         navigate('/sign-in')
       }
