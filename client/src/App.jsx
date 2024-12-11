@@ -18,10 +18,7 @@ const router = createBrowserRouter([
       { path: '', element: <Home /> },
       { path: 'about', element: <About /> },
       { path: 'sign-in', element: <Signin /> },
-      { path: 'sign-up', element: <>
-      <Signup /> 
-      <FooterComp/>
-      </>},
+      { path: 'sign-up', element: <Signup />},
       { path: 'dashboard', element: <Dashboard /> },
       { path: 'projects', element: <Projects /> }
     ]
@@ -31,7 +28,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-    <RouterProvider router={router} />
+    <RouterProvider router={router}>
+    </RouterProvider>
+    <FooterComp />
 
     </>
     
