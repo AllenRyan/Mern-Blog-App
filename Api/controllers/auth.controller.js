@@ -57,3 +57,36 @@ export const signIn = async (req, res, next) => {
         next(error)
     }
 }
+
+//google auth
+export const google = async (req, res, next) => {
+    const {name, email, googlePhotoUrl} = req.body;
+    try {
+        let user = await User.findOne({email});
+        if(user){
+            const token = jwt.sign({id: user._id}, process.env.JWT_SECRET);
+            user = await User.findOne({email}).select('-password');
+            res.status(200).cookie('access_token', token, {
+                httpOnly: true,
+            }).json(user)
+        } else {
+            const generatePassword = Math.random().toString(36).slice(-8) * Math.random().toString(36).slice(-8);
+            const hashedPassword = bycriptjs.compareSync(generatePassword, 10);
+            let newUser = User({
+                username: name.toLowerCase().split('').join('') + Math.random().toString(9).slice(-4),
+                email,
+                password: hashedPassword,
+                profilePicture: googlePhotoUrl,
+            })
+            await newUser.save();
+            const token = jwt.sign({id: newUser._id}, process.env.JWT_SECRET);
+            newUser = await User.findOne({email}).select('-password')
+            res.status(200).cookie('access_token', token, {
+                httpOnly: true
+            }).json(newUser)
+        }
+      
+    } catch (error) {
+        next(error)
+    }
+}
