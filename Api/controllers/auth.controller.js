@@ -69,16 +69,18 @@ export const google = async (req, res, next) => {
             res.status(200).cookie('access_token', token, {
                 httpOnly: true,
             }).json(user)
+
         } else {
-            const generatePassword = Math.random().toString(36).slice(-8) * Math.random().toString(36).slice(-8);
-            const hashedPassword = bycriptjs.compareSync(generatePassword, 10);
+            const generatePassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
+            const hashedPassword = bycriptjs.hashSync(generatePassword, 10);
             let newUser = User({
-                username: name.toLowerCase().split('').join('') + Math.random().toString(9).slice(-4),
+                username: name.toLowerCase().split(' ').join('') + Math.random().toString(9).slice(-4),
                 email,
                 password: hashedPassword,
-                profilePicture: googlePhotoUrl,
+                profilePic: googlePhotoUrl,
             })
             await newUser.save();
+            console.log('newUser', newUser)
             const token = jwt.sign({id: newUser._id}, process.env.JWT_SECRET);
             newUser = await User.findOne({email}).select('-password')
             res.status(200).cookie('access_token', token, {
