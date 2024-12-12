@@ -20,10 +20,14 @@ const router = createBrowserRouter([
       { path: 'about', element: <About /> },
       { path: 'sign-in', element: <Signin /> },
       { path: 'sign-up', element: <Signup />},
-      { path: 'dashboard', element: <PrivateRouter><Dashboard /></PrivateRouter> },
+      {path: 'dashboard', element: <PrivateRouter>
+      <Dashboard/>
+      </PrivateRouter> },
       { path: 'projects', element: <Projects /> }
     ]
   }
+ 
+  
 ]);
 
 function App() {
