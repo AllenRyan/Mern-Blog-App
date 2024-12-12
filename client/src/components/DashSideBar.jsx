@@ -21,11 +21,11 @@ function DashSideBar() {
         <Sidebar.Items>
        <Sidebar.ItemGroup>
         <Link to='/dashboard?tab=profile'>
-        <Sidebar.Item active={tab === 'profile'} icon={HiUser} label={'User'} labelColor="dark">
+        <Sidebar.Item as='div' active={tab === 'profile'} icon={HiUser} label={'User'} labelColor="dark">
             Profile
         </Sidebar.Item>
         </Link>
-        <Sidebar.Item  icon={HiArrowSmRight} >
+        <Sidebar.Item  icon={HiArrowSmRight} as='div'>
           Sign Out
         </Sidebar.Item>
        </Sidebar.ItemGroup>
