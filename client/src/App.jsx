@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard.jsx";
 import Projects from "./pages/Projects.jsx";
 import Layout from "./pages/Layout.jsx";
 import FooterComp from "./components/footer.jsx";
+import PrivateRouter from "./components/privateRoute.jsx";
 
 
 const router = createBrowserRouter([
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
       { path: 'about', element: <About /> },
       { path: 'sign-in', element: <Signin /> },
       { path: 'sign-up', element: <Signup />},
-      { path: 'dashboard', element: <Dashboard /> },
+      { path: 'dashboard', element: <PrivateRouter><Dashboard /></PrivateRouter> },
       { path: 'projects', element: <Projects /> }
     ]
   }
