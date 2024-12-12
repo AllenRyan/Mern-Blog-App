@@ -2,6 +2,8 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth.route.js"
+import cookieParser from "cookie-parser";
+import userRoute from "./routes/user.route.js";
 
 
 
@@ -18,8 +20,10 @@ const app = express();
 const port = 3000
 
 app.use(express.json());
+app.use(cookieParser())
 app.use(express.urlencoded({extended: true}))
 
+app.use('/api/user', userRoute)
 app.use('/api/auth', authRoutes)
 
 app.use((err, req, res, next) => {
