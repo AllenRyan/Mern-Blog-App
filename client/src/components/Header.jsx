@@ -24,7 +24,7 @@ function Header() {
 />
    </form>
    <Button className='w-10 h-8 justify-center items-center md:hidden' color='gray' pill>
-    <AiOutlineSearch className='text-black text-xl'/>
+    <AiOutlineSearch className='text-black dark:text-gray-200 text-xl'/>
    </Button>
    <div className='flex gap-2 items-center md:order-2'> 
     <Button onClick={() => dispatch(toggleTheme()) } color='gray' className='w-10 h-8 justify-center items-center hidden sm:flex' pill>
