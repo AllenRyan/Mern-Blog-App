@@ -45,11 +45,13 @@ export const signIn = async (req, res, next) => {
         if(!validPassword) {
             return next(errorHandler(400, 'Invalid Password'));
         }
-        validUser = await User.find({email}).select('-password');
+        validUser = await User.findOne({email}).select('-password');
+        console.log(validUser)
         const token = jwt.sign(
             {id: validUser._id},
             process.env.JWT_SECRET,
         );
+        console.log(validUser._id)
         res.status(200).cookie("access_token", token,{
            httpOnly: true
         }).json(validUser)
