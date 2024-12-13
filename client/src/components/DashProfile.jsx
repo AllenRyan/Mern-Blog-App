@@ -3,9 +3,10 @@ import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { updateStart, updateSuccess, updateFailure, deleteUserStart, deleteUserFailure, deleteUserSuccess, signOutSuccess,} from '../Redux/user/userSlice';
 import {HiOutlineExclamationCircle} from "react-icons/hi"
+import { Link } from 'react-router-dom';
 
 function DashProfile() {
-    const {currentUser, error} = useSelector(state => state.user);
+    const {currentUser, error, loading} = useSelector(state => state.user);
     const [imageFile, setImageFile] = useState(null);
     const [imageFileUrl, setImageFileUrl] = useState(null);
     const filePickerRef = useRef();
@@ -106,9 +107,24 @@ function DashProfile() {
             <TextInput type='text' id='username' placeholder='username' defaultValue={currentUser.username} onChange={handleChange}></TextInput>
             <TextInput type='email' id='email' placeholder='email' defaultValue={currentUser.email} onChange={handleChange}></TextInput>
             <TextInput type='password' id='password' placeholder='password' onChange={handleChange}></TextInput>
-            <Button gradientDuoTone='purpleToBlue' type='submit' outline>Update</Button>
+            <Button gradientDuoTone='purpleToBlue' type='submit' outline disabled={loading}>
+              {loading ? 'loading...' : "Update"}
+              </Button>
+              {
+          currentUser.isAdmin && (
+            <Link to={'/create-post'}>
+            <Button
+            type='button' 
+            gradientDuoTone='purpleToPink'
+            className='w-full'
+            >
+            Create Post
+            </Button>
+            </Link>
+          )
+        }
         </form>
-      
+       
         <div className='text-red-500 cursor-pointer flex justify-between mt-5 px-6 '>
             <span onClick={() => setShowModal(true)}>Delete Account</span>
             <span onClick={handleSignOut}>Sign Out</span>
@@ -118,7 +134,7 @@ function DashProfile() {
           {updateUserSuccess}
         </Alert>
         }
-
+     
         {updateUserError && 
         <Alert color='failure' className='mt-5'>
           {updateUserError}

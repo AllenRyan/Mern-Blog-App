@@ -9,6 +9,8 @@ import Projects from "./pages/Projects.jsx";
 import Layout from "./pages/Layout.jsx";
 import FooterComp from "./components/footer.jsx";
 import PrivateRouter from "./components/privateRoute.jsx";
+import CreatePost from "./pages/createPost.jsx";
+import AdminPrivateRouter from "./components/adminPrivateRouter.jsx";
 
 
 const router = createBrowserRouter([
@@ -23,7 +25,9 @@ const router = createBrowserRouter([
       {path: 'dashboard', element: <PrivateRouter>
       <Dashboard/>
       </PrivateRouter> },
-      { path: 'projects', element: <Projects /> }
+      {path: 'create-post', element: <AdminPrivateRouter>
+       <CreatePost/>
+      </AdminPrivateRouter> }
     ]
   }
  
