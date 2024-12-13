@@ -1,4 +1,4 @@
-import { Button, TextInput } from 'flowbite-react'
+import { Alert, Button, TextInput } from 'flowbite-react'
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { updateStart, updateSuccess, updateFailure, signInSuccess, signInFailure} from '../Redux/user/userSlice';
@@ -10,6 +10,7 @@ function DashProfile() {
     const filePickerRef = useRef();
     const [formData, setFormData] = useState({});
     const dispatch = useDispatch();
+    const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
     const handleChange =  (e) => {
       setFormData({...formData, [e.target.id]: e.target.value})
     }
@@ -34,6 +35,7 @@ function DashProfile() {
           dispatch(updateFailure(data.message))
         }else{
           dispatch(updateSuccess(data))
+          setUpdateUserSuccess('User Profile Updated Successfully')
         }
       } catch (error) {
         dispatch(updateFailure())
@@ -66,10 +68,16 @@ function DashProfile() {
             <TextInput type='password' id='password' placeholder='password' onChange={handleChange}></TextInput>
             <Button gradientDuoTone='purpleToBlue' type='submit' outline>Update</Button>
         </form>
+      
         <div className='text-red-500 cursor-pointer flex justify-between mt-5 px-6 '>
             <span>Delete Account</span>
             <span>Sign Out</span>
         </div>
+        {updateUserSuccess && 
+        <Alert color='success' className='mt-5'>
+          {updateUserSuccess}
+        </Alert>
+        }
     </div>
   )
 }
