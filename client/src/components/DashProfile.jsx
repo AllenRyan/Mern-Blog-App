@@ -1,7 +1,7 @@
 import { Alert, Button, TextInput } from 'flowbite-react'
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { updateStart, updateSuccess, updateFailure, signInSuccess, signInFailure} from '../Redux/user/userSlice';
+import { updateStart, updateSuccess, updateFailure,} from '../Redux/user/userSlice';
 
 function DashProfile() {
     const {currentUser} = useSelector(state => state.user);
@@ -11,6 +11,8 @@ function DashProfile() {
     const [formData, setFormData] = useState({});
     const dispatch = useDispatch();
     const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
+    const [updateUserError, setUpdateUserError] = useState(null);
+
     const handleChange =  (e) => {
       setFormData({...formData, [e.target.id]: e.target.value})
     }
@@ -18,6 +20,7 @@ function DashProfile() {
     const handleSubmit = async (e) => {
       e.preventDefault();
       if(Object.keys(formData).length === 0 ){
+        setUpdateUserError('No Changes Made')
           return;
       }
       try {
@@ -29,14 +32,16 @@ function DashProfile() {
           },
           body: JSON.stringify(formData)
         });
-        console.log(formData)
         const data = await res.json();
         if(!res.ok){
           dispatch(updateFailure(data.message))
-        }else{
+          setUpdateUserError(data.message)
+        } else{
           dispatch(updateSuccess(data))
-          setUpdateUserSuccess('User Profile Updated Successfully')
+          setUpdateUserSuccess("User Profile Updated Successfully")
+
         }
+       
       } catch (error) {
         dispatch(updateFailure())
       }
@@ -76,6 +81,12 @@ function DashProfile() {
         {updateUserSuccess && 
         <Alert color='success' className='mt-5'>
           {updateUserSuccess}
+        </Alert>
+        }
+
+        {updateUserError && 
+        <Alert color='failure' className='mt-5'>
+          {updateUserError}
         </Alert>
         }
     </div>
