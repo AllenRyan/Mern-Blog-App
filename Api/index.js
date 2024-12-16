@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/auth.route.js"
 import cookieParser from "cookie-parser";
 import userRoute from "./routes/user.route.js";
+import postRoute from  './routes/post.route.js';
 
 
 
@@ -25,6 +26,7 @@ app.use(express.urlencoded({extended: true}))
 
 app.use('/api/user', userRoute)
 app.use('/api/auth', authRoutes)
+app.use('/api/post', postRoute)
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
