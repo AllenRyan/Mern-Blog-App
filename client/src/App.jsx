@@ -11,6 +11,7 @@ import FooterComp from "./components/footer.jsx";
 import PrivateRouter from "./components/privateRoute.jsx";
 import CreatePost from "./pages/createPost.jsx";
 import AdminPrivateRouter from "./components/adminPrivateRouter.jsx";
+import UpdatePost from "./pages/updatePost.jsx";
 
 
 const router = createBrowserRouter([
@@ -27,6 +28,9 @@ const router = createBrowserRouter([
       </PrivateRouter> },
       {path: 'create-post', element: <AdminPrivateRouter>
        <CreatePost/>
+      </AdminPrivateRouter> },
+      {path: 'update-post/:postId', element: <AdminPrivateRouter>
+       <UpdatePost/>
       </AdminPrivateRouter> }
     ]
   }
