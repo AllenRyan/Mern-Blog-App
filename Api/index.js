@@ -5,6 +5,7 @@ import authRoutes from "./routes/auth.route.js"
 import cookieParser from "cookie-parser";
 import userRoute from "./routes/user.route.js";
 import postRoute from  './routes/post.route.js';
+import commentRoute from "./routes/comment.route.js";
 
 
 
@@ -27,6 +28,7 @@ app.use(express.urlencoded({extended: true}))
 app.use('/api/user', userRoute)
 app.use('/api/auth', authRoutes)
 app.use('/api/post', postRoute)
+app.use('/api/comments', commentRoute)
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;

@@ -13,12 +13,15 @@ import CreatePost from "./pages/createPost.jsx";
 import AdminPrivateRouter from "./components/adminPrivateRouter.jsx";
 import UpdatePost from "./pages/updatePost.jsx";
 import PostPage from "./pages/PostPage.jsx";
-
+import ScrollToTop from './components/ScrollToTop.jsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout />, // Use Layout as the root element
+    element: <>
+    <ScrollToTop/>
+    <Layout />
+    </>, // Use Layout as the root element
     children: [
       { path: '', element: <Home /> },
       { path: 'about', element: <About /> },
