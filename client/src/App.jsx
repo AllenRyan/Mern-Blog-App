@@ -12,6 +12,7 @@ import PrivateRouter from "./components/privateRoute.jsx";
 import CreatePost from "./pages/createPost.jsx";
 import AdminPrivateRouter from "./components/adminPrivateRouter.jsx";
 import UpdatePost from "./pages/updatePost.jsx";
+import PostPage from "./pages/PostPage.jsx";
 
 
 const router = createBrowserRouter([
@@ -31,7 +32,9 @@ const router = createBrowserRouter([
       </AdminPrivateRouter> },
       {path: 'update-post/:postId', element: <AdminPrivateRouter>
        <UpdatePost/>
-      </AdminPrivateRouter> }
+      </AdminPrivateRouter> },
+      {path: 'post/:postSlug', element:<PostPage/>}
+
     ]
   }
  
