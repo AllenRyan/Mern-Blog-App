@@ -48,6 +48,7 @@ function DashComments() {
         }
     }
     const handleDeleteComment = async () => {
+        setShowModal(false)
           try {
             const res = await fetch(`/api/comments/deleteComment/${commentIdToDelete}`,{
                 method: 'DELETE'
@@ -96,7 +97,7 @@ function DashComments() {
         <Table.Cell>
             <span className='cursor-pointer font-medium text-red-500 hover:underline' onClick={() => {
                 setShowModal(true);
-                setUserIdToDelete(comments._id);
+                setCommentIdToDelete(comment._id);
             } }>Delete</span>
         </Table.Cell>
        </Table.Row>

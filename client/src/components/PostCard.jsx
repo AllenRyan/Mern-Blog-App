@@ -2,9 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 function PostCard({ post}) {
   return (
-    <div className='group relative w-full border border-teal-500 hover:border-2 h-[340px] overflow-hidden rounded-lg sm:w-[360px]'>
+    <div className='group relative border border-teal-500 hover:border-2 h-[340px] overflow-hidden rounded-lg sm:w-[350px]'>
       <Link to={`/post/${post.slug}`}>
-       <img src={post.image} alt='post cover' className='h-[220px] w-full object-cover group-hover:h-[200px] transition-all duration-300 z-20' />
+       <img src={post.image} alt='post cover' className='h-[200px] w-full object-cover group-hover:h-[180px] transition-all duration-300 z-20' />
       </Link>
       <div className=' p-3 flex flex-col gap-1'>
         <p className='text-lg font-semibold line-clamp-2'>{post.title}</p>
