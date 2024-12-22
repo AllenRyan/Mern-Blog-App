@@ -1,6 +1,6 @@
 import { Avatar, Button, Dropdown, Navbar, TextInput } from 'flowbite-react'
-import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useLocation,useNavigate } from 'react-router-dom'
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,10 +10,26 @@ import { signOutSuccess } from '../Redux/user/userSlice.js';
 
 function Header() {
     const path = useLocation().pathname;
+    const location = useLocation();
     const {currentUser} = useSelector(state => state.user);
     const dispatch = useDispatch();
     const {theme} = useSelector(state => state.theme)
-
+    const [searchTerm, setSearchTerm] = useState('')
+    const navigate = useNavigate();
+    useEffect(() => {
+     const urlParams = new URLSearchParams(location.search);
+     const searchTermFromUrl = urlParams.get('searchTerm')
+     if(searchTermFromUrl){
+        setSearchTerm(searchTermFromUrl)
+     }
+    },[location.search])
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const urlParams = new URLSearchParams(location.search);
+        urlParams.set('searchTerm', searchTerm)
+        const searchQuery = urlParams.toString();
+        navigate(`/search?${searchQuery}`);
+    }
     const handleSignOut = async () => {
         try {
             const res = await fetch('/api/user/signout', {
@@ -33,11 +49,13 @@ function Header() {
   return (
    <Navbar className='border-b-2 flex justify-between items-center'> 
    <Link to='/' className='self-center whitespace-nowrap text-sm sm:text-xl font-bold dark:text-white'><span className='px-2 py-1 bg-gradient-to-r from-indigo-500 to-pink-500 rounded-xl text-white'>Abrar's</span>Blog</Link>
-   <form>
+   <form onSubmit={handleSubmit}>
    <TextInput 
    className='hidden md:block'
    type='text'
    placeholder='search...'
+   value={searchTerm}
+   onChange={(e) => setSearchTerm(e.target.value)}
   
 />
    </form>

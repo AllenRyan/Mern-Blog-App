@@ -14,6 +14,7 @@ import AdminPrivateRouter from "./components/adminPrivateRouter.jsx";
 import UpdatePost from "./pages/updatePost.jsx";
 import PostPage from "./pages/PostPage.jsx";
 import ScrollToTop from './components/ScrollToTop.jsx';
+import Search from "./pages/Search.jsx";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
       { path: 'about', element: <About /> },
       { path: 'sign-in', element: <Signin /> },
       { path: 'sign-up', element: <Signup />},
+      { path: 'search', element: <Search/>},
       {path: 'dashboard', element: <PrivateRouter>
       <Dashboard/>
       </PrivateRouter> },

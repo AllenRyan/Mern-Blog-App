@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-function PostCard({ post}) {
+function PostCard({post}) {
   return (
     <div className='group relative border border-teal-500 hover:border-2 h-[340px] overflow-hidden rounded-lg sm:w-[350px]'>
       <Link to={`/post/${post.slug}`}>
